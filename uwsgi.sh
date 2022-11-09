@@ -46,6 +46,17 @@ else
 fi
 sudo chown -R jenkins /etc/systemd/system/emperor.uwsgi.service
 
+if [ -e /etc/uwsgi/vassals/MainTechforing.ini ]
+then
+    echo "MainTechforing.ini file exists"
+else
+    echo "MainTechforing.ini file doesn't exists"
+    sudo cp -rf MainTechforing.ini.ini /etc/uwsgi/vassals/MainTechforing.ini.ini
+fi
+sudo cp -rf app1.ini /etc/uwsgi/vassals/MainTechforing.ini
+echo "Copied MainTechforing.ini file to path: /etc/uwsgi/vassals/MainTechforing.ini"
+sudo chown -R jenkins /etc/uwsgi/vassals/MainTechforing.ini
+
 sudo systemctl daemon-reload
-# sudo systemctl restart emperor.uwsgi.service
+sudo systemctl restart emperor.uwsgi.service
 sudo systemctl status emperor.uwsgi.service
