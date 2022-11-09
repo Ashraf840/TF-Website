@@ -30,7 +30,7 @@ category_choice = (
 class ServiceCategory(models.Model):
     category_choice = models.CharField(choices=category_choice, max_length=255)
     category_name = models.CharField(
-        max_length=264, verbose_name='Category Name')
+        max_length=255, verbose_name='Category Name')
 
     # category_description = models.TextField(max_length=1000, verbose_name='Category Description')
 
@@ -50,7 +50,7 @@ class SubscriptionServices(models.Model):
     service_icon = models.ImageField(
         upload_to='service_icon/', verbose_name='Service Icon')
     service_title = models.CharField(
-        max_length=264, verbose_name='Service Title')
+        max_length=255, verbose_name='Service Title')
     short_description = models.TextField(
         max_length=1000, verbose_name='Short Description')
     service_header = HTMLField(verbose_name='Service Header', blank=True)
@@ -73,7 +73,7 @@ class Service(models.Model):
     service_icon = models.ImageField(
         upload_to='service_icon/', verbose_name='Service Icon')
     service_title = models.CharField(
-        max_length=264, verbose_name='Service Title')
+        max_length=255, verbose_name='Service Title')
     short_description = models.TextField(
         max_length=1000, verbose_name='Short Description')
     service_header = HTMLField(verbose_name='Service Header', blank=True)
@@ -118,9 +118,9 @@ input_type = (
 
 
 class InputFields(models.Model):
-    type = models.CharField(max_length=264, choices=input_type)
-    # name = models.CharField(max_length=264, blank=True, null=True)
-    placeholder = models.CharField(max_length=264, blank=True, null=True)
+    type = models.CharField(max_length=255, choices=input_type)
+    # name = models.CharField(max_length=255, blank=True, null=True)
+    placeholder = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f'{self.type} - {self.placeholder}'
@@ -151,7 +151,7 @@ class SubService(models.Model):
         Service, on_delete=models.CASCADE, related_name='subservice_service')
     fields = models.ManyToManyField(
         InputFields, related_name='subservice_inputfields', through='SubServiceInput')
-    title = models.CharField(max_length=264, verbose_name='Title')
+    title = models.CharField(max_length=255, verbose_name='Title')
     # description = models.TextField(verbose_name='Description')
     total_customer = models.IntegerField(
         verbose_name='Total Customer', default=0, blank=True)
@@ -169,7 +169,7 @@ class SubServiceInput(models.Model):
     inputfield = models.ForeignKey(
         InputFields, on_delete=models.CASCADE, related_name='subserviceinput_inputfield')
 
-    # input_value = models.CharField(max_length=264, blank=True, null=True)
+    # input_value = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         db_table = 'BusinessSecurity_subservice_inputfields'
@@ -376,10 +376,10 @@ class SubscriptionBasedPackage(models.Model):
                                    related_name='package_subscription_service')
     package_id = models.CharField(max_length=255, blank=True)
     package_name = models.CharField(
-        max_length=264, verbose_name='Package Name')
+        max_length=255, verbose_name='Package Name')
     duration = models.IntegerField()
     duration_type = models.CharField(
-        choices=duration_type, max_length=264, default='month')
+        choices=duration_type, max_length=255, default='month')
     price = models.IntegerField()
     max_user = models.IntegerField(blank=True, null=True)
 
@@ -394,9 +394,9 @@ class SubscriptionFeatures(models.Model):
     package = models.ForeignKey(
         SubscriptionBasedPackage, on_delete=models.CASCADE, related_name='feature_subscription')
     feature_name = models.CharField(
-        max_length=264, verbose_name='Feature Name')
+        max_length=255, verbose_name='Feature Name')
     feature = models.CharField(
-        max_length=264, verbose_name='Feature')
+        max_length=255, verbose_name='Feature')
 
     def __str__(self):
         return f'{self.feature_name} - {self.feature}'
@@ -467,12 +467,12 @@ privilege = (
 
 
 class Business(models.Model):
-    industry_type = models.CharField(max_length=264, choices=industry_type)
-    company_name = models.CharField(max_length=264, unique=True)
+    industry_type = models.CharField(max_length=255, choices=industry_type)
+    company_name = models.CharField(max_length=255, unique=True)
     company_logo = models.ImageField(upload_to='company/', default='company/default.jpg')
-    website = models.URLField(max_length=264, default='https://')
+    website = models.URLField(max_length=255, default='https://')
     phone_number = models.CharField(max_length=24, verbose_name='Company Phone Number')
-    email = models.EmailField(max_length=264, verbose_name='Company Email')
+    email = models.EmailField(max_length=255, verbose_name='Company Email')
     address_one = models.CharField(max_length=255)
     address_two = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=255)
@@ -498,8 +498,8 @@ class UsersBusiness(models.Model):
         User, on_delete=models.CASCADE, related_name='business_user')
     business = models.ForeignKey(
         Business, on_delete=models.CASCADE, related_name='business_business')
-    position = models.CharField(max_length=264, default='staff')
-    privilege = models.CharField(max_length=264, choices=privilege, default='general_staff')
+    position = models.CharField(max_length=255, default='staff')
+    privilege = models.CharField(max_length=255, choices=privilege, default='general_staff')
     joined_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -525,15 +525,15 @@ status_list = (
 
 
 class Events(models.Model):
-    event_name = models.CharField(max_length=264)
-    medium = models.CharField(choices=medium_list, max_length=264)
-    speaker = models.CharField(max_length=264)
-    category = models.CharField(choices=category_list, max_length=264)
-    address = models.CharField(max_length=264)
+    event_name = models.CharField(max_length=255)
+    medium = models.CharField(choices=medium_list, max_length=255)
+    speaker = models.CharField(max_length=255)
+    category = models.CharField(choices=category_list, max_length=255)
+    address = models.CharField(max_length=255)
     timezone = TimeZoneField(choices_display='WITH_GMT_OFFSET', default='Europe/London')
     date_time = models.DateTimeField()
     # time_field = models.TimeField()
-    status = models.CharField(choices=status_list, max_length=264)
+    status = models.CharField(choices=status_list, max_length=255)
     event_description = HTMLField(max_length=5000)
     created_date = models.DateTimeField(auto_now_add=True)
     event_image=models.ImageField(upload_to='events/', default='events/default.jpg')
@@ -598,7 +598,7 @@ class SubscriptionInput(models.Model):
     inputfield = models.ForeignKey(
         InputFields, on_delete=models.CASCADE, related_name='subscriptioninput_inputfield')
 
-    # input_value = models.CharField(max_length=264, blank=True, null=True)
+    # input_value = models.CharField(max_length=255, blank=True, null=True)
 
     class Meta:
         db_table = 'BusinessSecurity_subscriptionfield_inputfields'
