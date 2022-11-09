@@ -16,6 +16,16 @@ else
     echo "Created the maintf_uwsgi.log file into path: $PWD/logs/maintf_uwsgi.log"
 fi
 
+if [ -d /etc/uwsgi/vassals ]
+then
+    echo "vassals dir exists"
+else
+    echo "vassals dir doesn't exists"
+    sudo mkdir /etc/uwsgi/vassals
+    echo "Created '/etc/uwsgi/vassals' dir!"
+fi
+sudo chown -R jenkins /etc/uwsgi/vassals
+
 sudo systemctl daemon-reload
 # sudo systemctl restart emperor.uwsgi.service
 sudo systemctl status emperor.uwsgi.service
