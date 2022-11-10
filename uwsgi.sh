@@ -51,9 +51,9 @@ then
     echo "MainTechforing.ini file exists"
 else
     echo "MainTechforing.ini file doesn't exists"
-    sudo cp -rf MainTechforing.ini.ini /etc/uwsgi/vassals/MainTechforing.ini.ini
+    sudo cp -rf MainTechforing.ini /etc/uwsgi/vassals/MainTechforing.ini
 fi
-sudo cp -rf app1.ini /etc/uwsgi/vassals/MainTechforing.ini
+sudo cp -rf MainTechforing.ini /etc/uwsgi/vassals/MainTechforing.ini
 echo "Copied MainTechforing.ini file to path: /etc/uwsgi/vassals/MainTechforing.ini"
 sudo chown -R jenkins /etc/uwsgi/vassals/MainTechforing.ini
 
