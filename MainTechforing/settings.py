@@ -37,7 +37,8 @@ SECRET_KEY = 'django-insecure-j55@su5sxajtqf_yed#+^vn&p0l=ovow1^6cp$&05so^8^l3th
 DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0', '44.242.38.198', 'techforing.com', 'pcs.techforing.com', 'training.techforing.com',
-                 '127.0.0.1', 'localhost', '.techforing.com','52.10.227.27','techforing.com','academy.techforing.com','school.techfoirng.com']
+                 '127.0.0.1', 'localhost', '.techforing.com','52.10.227.27','techforing.com','academy.techforing.com','school.techfoirng.com',
+                 'djangoblog.techforing.com']
 
 # Application definition
 
