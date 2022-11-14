@@ -5,7 +5,7 @@ host_patterns = patterns(
     '',
     # For Production
     host(r'', settings.ROOT_URLCONF, name='main'),
-    host(r'academy', 'Academy.urls', name='academy'),
+    host(r'devacademy', 'Academy.urls', name='academy'),
     host(r'pcs', 'PersonalSecurity.urls', name='mysecurity'),
     # host(r'', settings.ROOT_URLCONF, name='blog'),
     host(r'', settings.ROOT_URLCONF, name='account'),
