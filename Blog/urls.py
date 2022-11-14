@@ -1,5 +1,6 @@
 from django.urls import path, include
 from Blog import views
+from .wp_urls import urlpatterns as wp_re_path
 
 urlpatterns = [
     path('', views.indexView, name='index'),
@@ -66,3 +67,5 @@ urlpatterns = [
     path('filter_delete/', views.filterDeleteView, name='filter_delete'),
     path('filter_delete/<id>/', views.filterDeleteView, name='filter_delete'),
 ]
+
+urlpatterns += wp_re_path
