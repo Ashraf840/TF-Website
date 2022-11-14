@@ -2,8 +2,8 @@ from django.urls import path, include
 from Blog import views
 
 urlpatterns = [
+    path('', views.indexView, name='index'),
     path('blog/', views.indexView, name='index'),
-
     path('tinymce/', include('tinymce.urls')),
     path('category/', views.categoryView, name='category'),
     path('category/<name>/', views.categoryView, name='category'),

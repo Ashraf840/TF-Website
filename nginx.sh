@@ -24,7 +24,7 @@ echo "Copied the '$NGINX_CONF_FILE' file in path: $NGINX_SITES_AVAILABLE_DIR"
 chmod 710 /var/lib/jenkins/workspace/MainTF
 
 sudo ln -s $NGINX_SITES_AVAILABLE_DIR/MainTechforing.conf $NGINX_SITES_ENABLED_DIR
-sudo chown -R jenkins $NGINX_SITES_ENABLED_DIR/MainTechforing.conf
+sudo chown -R root:www-data $NGINX_SITES_ENABLED_DIR/MainTechforing.conf
 echo "Created symlink of '$NGINX_SITES_AVAILABLE_DIR/MainTechforing.conf' inside the path: $NGINX_SITES_ENABLED_DIR"
 
 sudo systemctl start nginx
