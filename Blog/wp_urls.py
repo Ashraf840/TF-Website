@@ -17,7 +17,7 @@ urlpatterns = [
 
     re_path(r'^cybersecurity-blogs-and-news/$', views.categoryView, name='articles'),     # redirects to "Articles" of blog category
     re_path(r'^cybersecurity-case-studies/$', views.categoryView, name='articles'),     # redirects to "Case Studies" of blog category
-    re_path(r'^podcast/$', views.categoryView, name='articles'),     # redirects to "Podcast" of blog category
+    re_path(r'^podcast/$', views.postView, name='articles'),     # redirects to "Podcast" of blog category
 ]
 
 
