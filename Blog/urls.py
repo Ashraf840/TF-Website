@@ -4,8 +4,8 @@ from .wp_urls import urlpatterns as wp_re_path
 
 urlpatterns = [
     path('', views.indexView, name='index'),
-    path('blog/', views.indexView, name='index'),
-     path('blogs/', views.indexView, name='index'),
+    #path('blog/', views.indexView, name='index'),
+    path('blogs/', views.indexView, name='index'),
 
     path('tinymce/', include('tinymce.urls')),
     path('category/', views.categoryView, name='category'),

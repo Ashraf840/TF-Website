@@ -434,6 +434,15 @@ def postView(request, name):
             user=request.user).values_list('post', flat=True)
         total = post.total_view
         category = str(request.path).split('/')[-3]
+
+        if category == "blogs" \
+                or category == "personal_cybersecurity" \
+                or category == "business_cybersecurity":
+            category = 'articles'
+
+        if category == "case_studies":
+            category = 'case_studies'
+
         post.total_view = total + 1
         post.save()
 
@@ -450,6 +459,15 @@ def postView(request, name):
 
         total = post.total_view
         category = str(request.path).split('/')[-3]
+
+        if category == "blogs" \
+                or category == "personal_cybersecurity" \
+                or category == "business_cybersecurity":
+            category = 'articles'
+
+        if category == "case_studies":
+            category = 'case_studies'
+
         post.total_view = total + 1
         post.save()
 
