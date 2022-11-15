@@ -1,9 +1,12 @@
 from django.urls import path, include
 from Blog import views
+from .wp_urls import urlpatterns as wp_re_path
 
 urlpatterns = [
     path('', views.indexView, name='index'),
     path('blog/', views.indexView, name='index'),
+     path('blogs/', views.indexView, name='index'),
+
     path('tinymce/', include('tinymce.urls')),
     path('category/', views.categoryView, name='category'),
     path('category/<name>/', views.categoryView, name='category'),
@@ -66,3 +69,5 @@ urlpatterns = [
     path('filter_delete/', views.filterDeleteView, name='filter_delete'),
     path('filter_delete/<id>/', views.filterDeleteView, name='filter_delete'),
 ]
+
+urlpatterns += wp_re_path
