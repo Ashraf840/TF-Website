@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponseRedirect, reverse, redirect
+from django.shortcuts import HttpResponse, render, HttpResponseRedirect, reverse, redirect
 from django.http import JsonResponse
 from django.core import serializers
 from django.db.models import Q
@@ -529,40 +529,152 @@ def readingListPost(request, id):
 
 
 # for specific category
-def categoryView(request, name):
-    posts = models.Post.objects.filter(
-        Q(category__category__iexact=str(name).replace('_', ' ')) | Q(category__category__iexact=str(name)))
-    cat_path = str(request.path).split('/')[-2]
-    subcategories = models.BlogSubCategory.objects.filter(
-        category__category__iexact=str(name).replace('_', ' ')).order_by('sub_category')
-    try:
-        reading_lists = models.ReadingList.objects.filter(
-            user=request.user).values_list('post', flat=True)
+def categoryView(request, name=None):
+    print("#"*50)
+    print("'categoryView' is called! extra param:", name)
+    print(f"URL path: {request.path}")
+    print("#"*50)
+    if name != None:
+        posts = models.Post.objects.filter(
+            Q(category__category__iexact=str(name).replace('_', ' ')) | Q(category__category__iexact=str(name)))
+        cat_path = str(request.path).split('/')[-2]
+        subcategories = models.BlogSubCategory.objects.filter(
+            category__category__iexact=str(name).replace('_', ' ')).order_by('sub_category')
+        try:
+            reading_lists = models.ReadingList.objects.filter(
+                user=request.user).values_list('post', flat=True)
 
-        # print(str(name).replace('_', ' ').title())
-        context = {
-            'posts': posts.order_by('-date'),
-            'path': name,
-            'pathname': name,
-            'cat_path': cat_path,
-            'important_posts': posts.order_by('-total_view')[:5],
-            'subcategories': subcategories,
-            'reading_lists': reading_lists,
-        }
+            # print(str(name).replace('_', ' ').title())
+            context = {
+                'posts': posts.order_by('-date'),
+                'path': name,
+                'pathname': name,
+                'cat_path': cat_path,
+                'important_posts': posts.order_by('-total_view')[:5],
+                'subcategories': subcategories,
+                'reading_lists': reading_lists,
+            }
 
-        return render(request, 'blog/category.html', context)
-    except:
-        context = {
-            'posts': posts.order_by('-date'),
-            'path': name,
-            'pathname': name,
-            'cat_path': cat_path,
-            'important_posts': posts.order_by('-total_view')[:5],
-            'subcategories': subcategories,
-        }
+            return render(request, 'blog/category.html', context)
+        except:
+            context = {
+                'posts': posts.order_by('-date'),
+                'path': name,
+                'pathname': name,
+                'cat_path': cat_path,
+                'important_posts': posts.order_by('-total_view')[:5],
+                'subcategories': subcategories,
+            }
 
-        return render(request, 'blog/category.html', context)
+            return render(request, 'blog/category.html', context)
+    else:
+        # ------------------------------------- Articles
+        if request.path == "/cybersecurity-blogs-and-news/":
+            name = "articles"
+            posts = models.Post.objects.filter(
+                Q(category__category__iexact=str(name).replace('_', ' ')) | Q(category__category__iexact=str(name)))
+            cat_path = str(request.path).split('/')[-2]
+            subcategories = models.BlogSubCategory.objects.filter(
+                category__category__iexact=str(name).replace('_', ' ')).order_by('sub_category')
+            try:
+                reading_lists = models.ReadingList.objects.filter(
+                    user=request.user).values_list('post', flat=True)
 
+                # print(str(name).replace('_', ' ').title())
+                context = {
+                    'posts': posts.order_by('-date'),
+                    'path': name,
+                    'pathname': name,
+                    'cat_path': cat_path,
+                    'important_posts': posts.order_by('-total_view')[:5],
+                    'subcategories': subcategories,
+                    'reading_lists': reading_lists,
+                }
+
+                return render(request, 'blog/category.html', context)
+            except:
+                context = {
+                    'posts': posts.order_by('-date'),
+                    'path': name,
+                    'pathname': name,
+                    'cat_path': cat_path,
+                    'important_posts': posts.order_by('-total_view')[:5],
+                    'subcategories': subcategories,
+                }
+
+                return render(request, 'blog/category.html', context)
+        # --------------------------------- Case Studies
+        if request.path == "/cybersecurity-case-studies/":
+            name = "case_studies"
+            posts = models.Post.objects.filter(
+                Q(category__category__iexact=str(name).replace('_', ' ')) | Q(category__category__iexact=str(name)))
+            cat_path = str(request.path).split('/')[-2]
+            subcategories = models.BlogSubCategory.objects.filter(
+                category__category__iexact=str(name).replace('_', ' ')).order_by('sub_category')
+            try:
+                reading_lists = models.ReadingList.objects.filter(
+                    user=request.user).values_list('post', flat=True)
+
+                # print(str(name).replace('_', ' ').title())
+                context = {
+                    'posts': posts.order_by('-date'),
+                    'path': name,
+                    'pathname': name,
+                    'cat_path': cat_path,
+                    'important_posts': posts.order_by('-total_view')[:5],
+                    'subcategories': subcategories,
+                    'reading_lists': reading_lists,
+                }
+
+                return render(request, 'blog/category.html', context)
+            except:
+                context = {
+                    'posts': posts.order_by('-date'),
+                    'path': name,
+                    'pathname': name,
+                    'cat_path': cat_path,
+                    'important_posts': posts.order_by('-total_view')[:5],
+                    'subcategories': subcategories,
+                }
+
+                return render(request, 'blog/category.html', context)
+        # ------------------------------------- podcast
+        if request.path == "/podcast/":
+            name = "podcast"
+            posts = models.Post.objects.filter(
+                Q(category__category__iexact=str(name).replace('_', ' ')) | Q(
+                    category__category__iexact=str(name)))
+            cat_path = str(request.path).split('/')[-2]
+            subcategories = models.BlogSubCategory.objects.filter(
+                category__category__iexact=str(name).replace('_', ' ')).order_by('sub_category')
+            try:
+                reading_lists = models.ReadingList.objects.filter(
+                    user=request.user).values_list('post', flat=True)
+
+                # print(str(name).replace('_', ' ').title())
+                context = {
+                    'posts': posts.order_by('-date'),
+                    'path': name,
+                    'pathname': name,
+                    'cat_path': cat_path,
+                    'important_posts': posts.order_by('-total_view')[:5],
+                    'subcategories': subcategories,
+                    'reading_lists': reading_lists,
+                }
+
+                return render(request, 'blog/category.html', context)
+            except:
+                context = {
+                    'posts': posts.order_by('-date'),
+                    'path': name,
+                    'pathname': name,
+                    'cat_path': cat_path,
+                    'important_posts': posts.order_by('-total_view')[:5],
+                    'subcategories': subcategories,
+                }
+
+                return render(request, 'blog/category.html', context)
+    return HttpResponse("Name param is none in 'categoryView()'")
 
 def category_detailView(request, name1, name2):
     posts = models.Post.objects.filter(category__category__iexact=str(name1).replace('_', ' '),
