@@ -10,7 +10,7 @@ host_patterns = patterns(
     # host(r'', settings.ROOT_URLCONF, name='blog'),
     host(r'', settings.ROOT_URLCONF, name='account'),
     host(r'', settings.ROOT_URLCONF, name='api'),
-    host(r'djangoblog', 'Blog.urls', name='blog')
+    host(r'blog', 'Blog.urls', name='blog')
 
 
     # For Development
