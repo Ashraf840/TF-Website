@@ -552,7 +552,12 @@ def addToReadingListView(request, id):
             user=request.user, post=current_post)
     else:
         is_saved.delete()
-    return redirect('/blog/')
+    if current_post.category.category == 'Articles':
+        return redirect('articles', name=current_post.post_url)
+    if current_post.category.category == 'Case Studies':
+        return redirect('case_studies', name=current_post.post_url)
+    if current_post.category.category == 'Podcast':
+        return redirect('podcast', name=current_post.post_url)
 
 
 @login_required
